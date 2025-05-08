@@ -132,10 +132,10 @@ def web_search(query):
 def handle_bang(query):
     global search_dir
     if query.startswith("!p"):
-        search_dir = os.path.expanduser(query.split(" ")[1:])
+        search_dir = os.path.expanduser(" ".join(query.split(" ")[1:]))
         return True
     if query.startswith("!g"):
-        web_search(' '.join(query.split(" ")[1:]))
+        web_search(" ".join(query.split(" ")[1:]))
 
     return False
 
@@ -148,7 +148,7 @@ def rofi_loading():
         stdin=subprocess.PIPE,
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,
-        text=True
+        text=True,
     )
 
 
@@ -161,7 +161,7 @@ def main():
             f"{search_dir}",
             [],
             allow_custom=True,
-            custom_args=["-theme-str", "#window { height: 60px;}"]
+            custom_args=["-theme-str", "#window { height: 60px;}"],
         )
 
         if not query:
